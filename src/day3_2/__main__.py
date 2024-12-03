@@ -46,14 +46,12 @@ def main(f: BinaryIO):
     count = 0
     do = True
     for i in range(len(mem) - 3):
-        do_t = mem[i:i + 4]
-        dont_t = mem[i:i + 7]
-        mul_t = mem[i:i + 4]
-        if do and dont_t == "don't()":
+        token = mem[i:i + 7]
+        if do and token.startswith("don't()"):
             do = False
-        if not do and do_t == "do()":
+        if not do and token.startswith("do()"):
             do = True
-        if do and mul_t == "mul(":
+        if do and token.startswith("mul("):
             i += 4
             args = parse_mul(i, mem)
             if not args:
