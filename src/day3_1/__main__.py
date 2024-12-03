@@ -1,3 +1,4 @@
+import time
 from typing import BinaryIO
 
 
@@ -40,6 +41,7 @@ def parse_mul(idx: int, mem: str):
 
 def main(f: BinaryIO):
     mem = parse(f)
+    t1 = time.perf_counter()
     mem = mem.decode('utf-8')
     count = 0
     for i in range(len(mem) -3 ):
@@ -50,7 +52,8 @@ def main(f: BinaryIO):
             if not args:
                 continue
             count += mul(*args)
-    print(count)
+    t2 = (time.perf_counter() - t1)
+    print(count, t2)
 
 
 if __name__ == '__main__':
